@@ -1,0 +1,58 @@
+# def extract_text_from_pdf(pdf_path):
+#     text = ""
+#     with open(pdf_path, "rb") as pdf_file:
+#         pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+#         for page_num in range(pdf_reader.numPages):
+#             page = pdf_reader.getPage(page_num)
+            
+#             if '/Contents' in page:
+#                 text += page.extractText()
+                
+#     return text
+
+# pdf_path = "data/2022_satellite.pdf"
+# text_from_pdf = extract_text_from_pdf(pdf_path)
+
+# def extract_text_from_docx(docx_path):
+#     paragraphs = []
+#     doc = docx.Document(docx_path)
+#     for paragraph in doc.paragraphs:
+#         paragraphs.append(paragraph.text)
+#     return paragraphs
+
+# def extract_table_of_contents(docx_path):
+#     doc = docx.Document(docx_path)
+#     table_of_contents = []
+
+#     for element in doc.element.body:
+#         if isinstance(element, docx.text.paragraph.Paragraph):
+#             if element.style.name.startswith("TOC"):
+#                 table_of_contents.append(element.text)
+
+#     return table_of_contents
+
+# def pdf_to_docx(pdf_path, docx_path): # корявый пдф ту док на питоне
+#     # Відкрити PDF файл
+#     doc = fitz.open(pdf_path)
+#     document = Document()
+
+#     # Перебрати кожну сторінку в PDF
+#     for page_num in range(len(doc)):
+#         page = doc.load_page(page_num)  # отримати сторінку
+#         text = page.get_text()  # екстрагувати текст
+#         document.add_paragraph(text)  # додати текст у DOCX
+
+#     # Зберегти DOCX файл
+#     document.save(docx_path)
+
+#     # Закрити PDF файл
+#     doc.close()
+
+# # Шлях до вашого PDF файла
+# pdf_path = "data/2022_satellite.pdf"
+
+# # Шлях, де ви хочете зберегти DOCX файл
+# docx_path = 'data/output.docx'
+
+# # Конвертувати PDF в DOCX
+# pdf_to_docx(pdf_path, docx_path)
