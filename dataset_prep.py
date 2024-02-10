@@ -91,3 +91,25 @@ def articles_text_to_df(contents_df, text_from_docx, end_marker='References:'):
         df.at[i, 'Text'] = find_article_text(text_from_docx, start, end_marker)
 
     return df
+
+
+def create_total_dataframe(all_docx):
+    total_df = pd.DataFrame()
+
+    for docx_path in all_docx:
+        text_from_docx = extract_text_from_docx(docx_path)
+
+        if '2022' in docx_path:
+            marker = ['Authors', '180']
+        elif '2021' in docx_path:
+            marker = ['Figure 1: Centralized network', 'Figure 2: Decentralized network']
+        else:
+            marker = None
+
+        contents_data = extract_data_from_table(docx_path, marker)
+        contents_df = process_contents_df(contents_data)
+        articles_df = articles_text_to_df(contents_df, text_from_docx)
+
+        total_df = pd.concat([total_df, articles_df], ignore_index=True)
+
+    return total_df
